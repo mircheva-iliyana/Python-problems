@@ -4,13 +4,11 @@
 # Be sure to print your answer as a bin() string for each variable in the list
 
 def flip_bits(bits_list):
-    for number in bits_list:
-        number = bin(number)[2:]
-        mask = ''
-        for i in range(len(number)):
-            mask += '1'
-        result = int(number) ^ int(mask)
-        print(result)
+    for i in range(len(bits_list)):
+        # the mask should be as long as the current number without the first two symbols
+        mask = (1 << (len(bin(bits_list[i])) - 2)) - 1
+        bits_list[i] = bits_list[i] ^ mask
+        print(bin(bits_list[i]))
 
 
 flip_bits([0b10111011, 0b10110001])
