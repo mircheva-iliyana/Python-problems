@@ -6,13 +6,16 @@
 
 def my_func(l, n):
     result = []
-    for i in range((len(l) - 1)):
-        wanted = n - l[i]
-        if wanted in l and wanted != l[i] and wanted <= i:
-            result.append([l[i], wanted])
+    start = l[0]
+    end = l[-1]
+    for item in l:
+        if start <= n - item <= end:
+            if n - item != item:  # eliminate adding the same number twice
+                if item < n // 2 + 1:  # eliminate repeating couples
+                    result.append([item, n - item])
     return tuple(result)
 
 
-ll = my_func([1, 2, 3, 4, 5, 6, 7, 8, 9], 8)
+ll = my_func([1, 2, 3, 4, 5, 6, 7, 8, 9], 17)
 print(ll)
 
