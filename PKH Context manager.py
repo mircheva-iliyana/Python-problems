@@ -3,13 +3,10 @@
 
 class ContextManager:
     def __init__(self, file, functionality):
-        self.file = file
-        self.functionality = functionality
+        self.file = open(file, functionality)
 
     def __enter__(self):
         print('Opening file...')
-        self.file = open(self.file, self.functionality)
-        self.file.write("First sentence**")
         return self.file
 
     def __exit__(self, type, value, traceback):
@@ -19,5 +16,5 @@ class ContextManager:
 
 
 with ContextManager('My_file.txt', 'w') as f:
-    print(f)
+    f.write("First sentence")
 
