@@ -6,15 +6,22 @@
 
 def my_func(l, n):
     result = []
-    my_set = set(l)
+    left = 0
+    right = len(l) - 1
+    while left < right:
+        sum = l[right] + l[left]
+        if sum == n:
+            result.append((l[right], l[left]))
+            left += 1
+            right -= 1
+        elif sum < n:
+            left += 1
+        elif sum > n:
+            right -= 1
 
-    for item in l:
-        wanted = n - item
-        if wanted in my_set and wanted < n / 2:
-            result.append([item, wanted])
     return tuple(result)
 
 
-ll = my_func([10, 20, 30, 40, 50, 60, 70, 80], 40)
+ll = my_func([10, 20, 30, 40, 50, 60, 70, 80], 15)
 print(ll)
 
