@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 
 class Student:
@@ -14,14 +15,18 @@ class Student:
         for grade in new_grades:
             self.grades.append(grade)
 
+    def __str__(self):
+        return f'Major: {self.major}'
+
 
 class Gradebook:
 
     def __init__(self):
         self.gradebook = {}
 
-    def __str__(self):
-        return f'{self.gradebook}'
+    def show_all_students(self):
+        for key, item in self.gradebook.items():
+            print(f'{self.gradebook[key]} - {self.gradebook[item]}')
 
     def add_student(self):
         name = input("Enter student name: ")
@@ -36,9 +41,9 @@ class Gradebook:
         if name not in self.gradebook:
             student = Student(name, age, major, courses, grades)
             self.gradebook[name] = student
-            print(f"Added student {name}")
+            messagebox.showinfo(f"Added student {name}")
         else:
-            print(f"Student {name} already exists in gradebook")
+            messagebox.showinfo(f"Student {name} already exists in gradebook")
 
     def remove_student(self):
         name = input("Enter student name: ")
@@ -86,6 +91,9 @@ button_add_subject = tk.Button(root, text="Add Subject", command=gradebook.add_s
 button_add_subject.pack()
 
 button_remove_subject = tk.Button(root, text="Remove Subject", command=gradebook.remove_subject)
+button_remove_subject.pack()
+
+button_remove_subject = tk.Button(root, text="Show all students", command=gradebook.show_all_students)
 button_remove_subject.pack()
 
 root.mainloop()
